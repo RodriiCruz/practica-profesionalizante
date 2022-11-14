@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,22 +24,24 @@ public class IMCController {
 	private IMCService service;
 	
 	@PostMapping("/guardar")
-	public ResponseEntity<?> guardar(@RequestBody IMCRequest request){
+	public ResponseEntity<?> guardar(@RequestHeader(name = "Authorization") String token, 
+			@RequestBody IMCRequest request){
 		return new ResponseEntity<>(service.guardarIMC(request), HttpStatus.CREATED);
 	}
 	
 	@GetMapping("/listar")
-	public ResponseEntity<?> listar(){
+	public ResponseEntity<?> listar(@RequestHeader(name = "Authorization") String token){
 		return new ResponseEntity<>(service.listarIMC(), HttpStatus.OK);
 	}
 	
 	@PutMapping("/editar/{id}")
-	public ResponseEntity<?> editar(@PathVariable Long id, @RequestBody IMCRequest request){
+	public ResponseEntity<?> editar(@RequestHeader(name = "Authorization") String token, @PathVariable Long id, 
+			@RequestBody IMCRequest request){
 		return new ResponseEntity<>(service.editarIMC(id, request), HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/eliminar/{id}")
-	public ResponseEntity<?> eliminar(@PathVariable Long id){
+	public ResponseEntity<?> eliminar(@RequestHeader(name = "Authorization") String token, @PathVariable Long id){
 		service.eliminarIMC(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}

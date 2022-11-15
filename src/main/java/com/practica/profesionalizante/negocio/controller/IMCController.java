@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.practica.profesionalizante.negocio.dto.IMCRequest;
 import com.practica.profesionalizante.negocio.service.IMCService;
 
@@ -25,18 +26,19 @@ public class IMCController {
 	
 	@PostMapping("/guardar")
 	public ResponseEntity<?> guardar(@RequestHeader(name = "Authorization") String token, 
-			@RequestBody IMCRequest request){
-		return new ResponseEntity<>(service.guardarIMC(request), HttpStatus.CREATED);
+			@RequestBody IMCRequest request) throws JsonProcessingException{
+		return new ResponseEntity<>(service.guardarIMC(token, request), HttpStatus.CREATED);
 	}
 	
 	@GetMapping("/listar")
-	public ResponseEntity<?> listar(@RequestHeader(name = "Authorization") String token){
-		return new ResponseEntity<>(service.listarIMC(), HttpStatus.OK);
+	public ResponseEntity<?> listar(@RequestHeader(name = "Authorization") String token) 
+			throws JsonProcessingException{
+		return new ResponseEntity<>(service.listarIMC(token), HttpStatus.OK);
 	}
 	
 	@PutMapping("/editar/{id}")
 	public ResponseEntity<?> editar(@RequestHeader(name = "Authorization") String token, @PathVariable Long id, 
-			@RequestBody IMCRequest request){
+			@RequestBody IMCRequest request) throws JsonProcessingException{
 		return new ResponseEntity<>(service.editarIMC(id, request), HttpStatus.OK);
 	}
 	

@@ -11,5 +11,5 @@ import com.practica.profesionalizante.negocio.entity.IMC;
 @Repository
 public interface IMCRepository extends JpaRepository<IMC, Long>{
 
-	Optional<List<IMC>> findByUsuario(Long usuario);
+	Optional<List<IMC>> findByUsuario(String usuario);
 }

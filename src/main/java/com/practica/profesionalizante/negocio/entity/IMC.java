@@ -29,7 +29,7 @@ public class IMC {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-	private Long usuario;
+	private String usuario;
 	private String nombre;
 	private Double altura;
 	private Double peso;

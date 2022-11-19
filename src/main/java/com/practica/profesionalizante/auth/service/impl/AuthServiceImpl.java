@@ -36,7 +36,7 @@ public class AuthServiceImpl implements AuthService {
 
 	@Override
 	@Transactional
-	public ResponseLoginDto register(RegisterDto registro) {
+	public void register(RegisterDto registro) {
 		if (existsUsuario(registro.getUsuario())) {
 			throw new UserAlreadyExistsException("El usuario ya se encuentra registrado");
 		}
@@ -52,8 +52,6 @@ public class AuthServiceImpl implements AuthService {
 		usuario.setUsuario(registro.getUsuario());
 		usuario.setPassword(registro.getPassword());
 		repository.save(usuario);
-		
-		return null;
 	}
 
 	@Override

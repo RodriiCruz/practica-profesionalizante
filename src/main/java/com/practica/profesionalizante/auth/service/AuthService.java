@@ -9,7 +9,7 @@ import com.practica.profesionalizante.auth.entity.Usuario;
 
 public interface AuthService {
 
-	ResponseLoginDto register(RegisterDto registro);
+	void register(RegisterDto registro);
 
     ResponseLoginDto login(RequestLoginDto login);
 
